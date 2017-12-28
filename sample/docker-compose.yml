@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  # See ../README.md for instructions on how to build the project
+  exporter:
+    image: danielfm/crypto-exporter:0.1.0
+    command: --v=2
+    restart: on-failure
+    ports:
+      - 8080:8080
+
+  alertmanager:
+    image: prom/alertmanager:v0.12.0
+    restart: on-failure
+    ports:
+      - 9093:9093
+
+  prometheus:
+    image: prom/prometheus:v2.0.0
+    restart: on-failure
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    depends_on:
+      - exporter
+      - alertmanager
+
+  # Requires Grafana v5.x for the automatic provisioning features
+  grafana:
+    image: grafana/grafana:master
+    restart: on-failure
+    environment:
+      GF_LOG_LEVEL: debug
+    volumes:
+      - ./config/grafana/datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml
+      - ./config/grafana/dashboard-providers.yml:/etc/grafana/provisioning/dashboards/dashboard-providers.yml
+      - ./config/grafana/dashboards/:/var/lib/grafana/dashboards/
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
