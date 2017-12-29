@@ -23,10 +23,10 @@ This are the metrics currently exposed by this server:
 | Metric Name             | Type    | Description                                 | 
 |-------------------------|---------|---------------------------------------------|
 | `<ns>_order_count`      | Counter | Number of unexecuted/canceled orders.       |
-| `<ns>_trade_count`      | Gauge   | Number of executed orders.                  |
+| `<ns>_trade_count`      | Counter | Number of executed orders.                  |
 | `<ns>_trade_price`      | Gauge   | Last trade amount, in quote currency.       |
 | `<ns>_trade_amount`     | Gauge   | Last trade amount, in base currency.        |
-| `<ns>_trade_amount_sum` | Gauge   | Sum of all trade amounts, in base currency. |
+| `<ns>_trade_amount_sum` | Counter | Sum of all trade amounts, in base currency. |
 
 Where `<ns>` is the value provided via the `-namespace` [command line flag](#flags).
 
