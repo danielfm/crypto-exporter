@@ -31,11 +31,13 @@ func main() {
 	glog.Infof("Crypto Exporter v%s started, listening on %s.", VERSION, *addr)
 	glog.Infof("Parameters: endpoint=%s, namespace=%s", *metricsEndpoint, *metricsNamespace)
 
-	// Registers each collector
-	bitcointradeCollector := collector.NewBitcointradeCollector(*metricsNamespace)
+	metrics := collector.NewCryptoExchangeMetrics(*metricsNamespace)
+
+	// Registers collectors for each supported exchange
+	bitcointradeCollector := collector.NewBitcointradeCollector(metrics)
 	prometheus.Register(bitcointradeCollector)
 
-	// Stream metrics from each collector endpoint
+	// Stream metrics from each supported exchange in background
 	go bitcointradeCollector.Connect()
 
 	http.Handle(*metricsEndpoint, promhttp.Handler())
