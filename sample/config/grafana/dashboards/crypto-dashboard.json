@@ -13,7 +13,7 @@
       }
     ]
   },
-  "description": "Simple dashboard for the crypto-exporter project",
+  "description": "Simple dashboard for crypto-exporter",
   "links": [
     {
       "icon": "external link",
@@ -34,6 +34,566 @@
         "x": 0,
         "y": 0
       },
+      "id": 13,
+      "panels": [],
+      "repeat": "exchange",
+      "scopedVars": {
+        "exchange": {
+          "selected": true,
+          "text": "bitcointrade",
+          "value": "bitcointrade"
+        }
+      },
+      "title": "Summary ($exchange)",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "datasource": null,
+      "decimals": 2,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 0,
+        "y": 1
+      },
+      "id": 17,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "  $quote_currency",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "scopedVars": {
+        "exchange": {
+          "selected": true,
+          "text": "bitcointrade",
+          "value": "bitcointrade"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "crypto_trade_price{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\", operation=\"bid\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": "24h",
+      "title": "Last Bid ($base_currency)",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "datasource": null,
+      "decimals": 2,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 6,
+        "y": 1
+      },
+      "id": 19,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "  $quote_currency",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "scopedVars": {
+        "exchange": {
+          "selected": true,
+          "text": "bitcointrade",
+          "value": "bitcointrade"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "max(max_over_time(crypto_trade_price{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"}[$summary_period]))",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": "$summary_period",
+      "title": "High ($base_currency)",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "datasource": null,
+      "decimals": 2,
+      "description": "Difference in price between the minimum price at the period start and the maximum price at period end.",
+      "format": "percentunit",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 1
+      },
+      "id": 15,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "scopedVars": {
+        "exchange": {
+          "selected": true,
+          "text": "bitcointrade",
+          "value": "bitcointrade"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 120, 193, 0.11)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "$$hashKey": "object:326",
+          "expr": "(max(crypto_trade_price{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"}) - min(crypto_trade_price{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"} offset $summary_period))\n/\nmin(crypto_trade_price{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"} offset $summary_period)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "0,0",
+      "timeFrom": "$summary_period",
+      "title": "Price Variation ($base_currency - $quote_currency)",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "datasource": null,
+      "decimals": 8,
+      "description": "Total number of coins exchanged in the selected period.",
+      "format": "short",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 16,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": " $base_currency",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "scopedVars": {
+        "exchange": {
+          "selected": true,
+          "text": "bitcointrade",
+          "value": "bitcointrade"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "$$hashKey": "object:182",
+          "expr": "sum(delta(crypto_trade_amount_sum{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\"}[$summary_period]))",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": "$summary_period",
+      "title": "Volume ($base_currency - $quote_currency)",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "datasource": null,
+      "decimals": 2,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 0,
+        "y": 3
+      },
+      "id": 18,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "  $quote_currency",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "scopedVars": {
+        "exchange": {
+          "selected": true,
+          "text": "bitcointrade",
+          "value": "bitcointrade"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "crypto_trade_price{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\", operation=\"ask\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": "24h",
+      "title": "Last Ask ($base_currency)",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "#299c46"
+      ],
+      "datasource": null,
+      "decimals": 2,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 6,
+        "y": 3
+      },
+      "id": 20,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "  $quote_currency",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "scopedVars": {
+        "exchange": {
+          "selected": true,
+          "text": "bitcointrade",
+          "value": "bitcointrade"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "min(min_over_time(crypto_trade_price{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"}[$summary_period]))",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": "$summary_period",
+      "title": "Low ($base_currency)",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
       "id": 7,
       "panels": [],
       "title": "Order Book",
@@ -45,13 +605,13 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "description": "Number of bid/asks orders created in the last minute.",
-      "fill": 1,
+      "description": "Number of bid/asks orders created in the last minute, across all selected exchanges.",
+      "fill": 10,
       "gridPos": {
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 1
+        "y": 6
       },
       "id": 9,
       "legend": {
@@ -77,10 +637,9 @@
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": true,
-      "steppedLine": false,
+      "steppedLine": true,
       "targets": [
         {
-          "$$hashKey": "object:176",
           "expr": "sum(increase(crypto_order_count{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\", event=\"create\"}[1m])) by (operation)",
           "format": "time_series",
           "intervalFactor": 1,
@@ -107,7 +666,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:292",
           "format": "short",
           "label": "op/m",
           "logBase": 1,
@@ -116,7 +674,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:293",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -138,7 +695,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 1
+        "y": 6
       },
       "id": 10,
       "legend": {
@@ -166,11 +723,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:405",
-          "expr": "sum(increase(crypto_order_count{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\", operation=\"bid\"}[1m])) by (event)",
+          "expr": "sum(increase(crypto_order_count{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\", operation=\"bid\"}[1m])) by (event, exchange_name)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{ event }}",
+          "legendFormat": "{{ event }} ({{ exchange_name }})",
           "refId": "A"
         }
       ],
@@ -193,7 +749,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:430",
           "format": "short",
           "label": "op/m",
           "logBase": 1,
@@ -202,7 +757,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:431",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -224,7 +778,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 1
+        "y": 6
       },
       "id": 11,
       "legend": {
@@ -252,11 +806,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:502",
-          "expr": "sum(increase(crypto_order_count{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\", operation=\"ask\"}[1m])) by (event)",
+          "expr": "sum(increase(crypto_order_count{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\", operation=\"ask\"}[1m])) by (event, exchange_name)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{ event }}",
+          "legendFormat": "{{ event }} ({{ exchange_name }})",
           "refId": "A"
         }
       ],
@@ -302,7 +855,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 13
       },
       "id": 5,
       "panels": [],
@@ -321,7 +874,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 9
+        "y": 14
       },
       "id": 1,
       "legend": {
@@ -348,11 +901,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:654",
-          "expr": "sum(increase(crypto_trade_count{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"}[1m])) by (operation)",
+          "expr": "sum(increase(crypto_trade_count{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"}[1m])) by (operation, exchange_name)",
           "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "{{ operation }}",
+          "intervalFactor": 1,
+          "legendFormat": "{{ operation }} ({{ exchange_name }})",
           "refId": "C"
         }
       ],
@@ -404,7 +956,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 9
+        "y": 14
       },
       "id": 2,
       "legend": {
@@ -422,7 +974,7 @@
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
-      "pointradius": 5,
+      "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
@@ -431,11 +983,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:578",
-          "expr": "sum(crypto_trade_price{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"}) by (operation)",
+          "$$hashKey": "object:586",
+          "expr": "sum(crypto_trade_price{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"}) by (operation, exchange_name)",
           "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "{{ operation }}",
+          "intervalFactor": 1,
+          "legendFormat": "{{ operation }} ({{ exchange_name }})",
           "refId": "A"
         }
       ],
@@ -481,13 +1033,13 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "description": "Volume exchanged, in base currency, within the last minute.",
+      "description": "Volume exchanged, in $base_currency, within the last minute.",
       "fill": 1,
       "gridPos": {
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 9
+        "y": 14
       },
       "id": 3,
       "legend": {
@@ -514,11 +1066,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:730",
-          "expr": "sum(increase(crypto_trade_amount_sum{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"}[1m])) by (operation)",
+          "$$hashKey": "object:653",
+          "expr": "sum(increase(crypto_trade_amount_sum{exchange_name=~\"^$exchange$\", base_currency=\"$base_currency\", quote_currency=\"$quote_currency\"}[1m])) by (operation, exchange_name)",
           "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "{{ operation }}",
+          "intervalFactor": 1,
+          "legendFormat": "{{ operation }} ({{ exchange_name }})",
           "refId": "A"
         }
       ],
@@ -541,7 +1093,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:1591",
           "format": "short",
           "label": "amount",
           "logBase": 1,
@@ -550,7 +1101,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:1592",
           "format": "short",
           "label": "base currency",
           "logBase": 1,
@@ -565,41 +1115,27 @@
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
-    "crypto",
     "prometheus",
-    "exchanges"
+    "cryptocurrency",
+    "exchange"
   ],
   "templating": {
     "list": [
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": "All",
-          "value": "$__all"
+          "text": "bitcointrade",
+          "value": "bitcointrade"
         },
         "datasource": "Prometheus",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": null,
-        "multi": false,
+        "multi": true,
         "name": "exchange",
-        "options": [
-          {
-            "$$hashKey": "object:800",
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "$$hashKey": "object:801",
-            "selected": false,
-            "text": "bitcointrade",
-            "value": "bitcointrade"
-          }
-        ],
-        "query": "label_values(crypto_exchange_trade_count, exchange_name)",
-        "refresh": 0,
+        "options": [],
+        "query": "label_values(crypto_order_count, exchange_name)",
+        "refresh": 1,
         "regex": "",
         "sort": 0,
         "tagValuesQuery": "",
@@ -611,7 +1147,6 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
           "text": "BTC",
           "value": "BTC"
         },
@@ -621,16 +1156,32 @@
         "label": null,
         "multi": false,
         "name": "base_currency",
-        "options": [
-          {
-            "$$hashKey": "object:775",
-            "selected": true,
-            "text": "BTC",
-            "value": "BTC"
-          }
-        ],
-        "query": "label_values(crypto_exchange_trade_count, base_currency)",
-        "refresh": 0,
+        "options": [],
+        "query": "label_values(crypto_order_count, base_currency)",
+        "refresh": 1,
+        "regex": "",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "BRL",
+          "value": "BRL"
+        },
+        "datasource": "Prometheus",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "quote_currency",
+        "options": [],
+        "query": "label_values(crypto_order_count, quote_currency)",
+        "refresh": 1,
         "regex": "",
         "sort": 0,
         "tagValuesQuery": "",
@@ -643,32 +1194,43 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "text": "BRL",
-          "value": "BRL"
+          "text": "24h",
+          "value": "24h"
         },
-        "datasource": "Prometheus",
         "hide": 0,
         "includeAll": false,
         "label": null,
         "multi": false,
-        "name": "quote_currency",
+        "name": "summary_period",
         "options": [
           {
-            "$$hashKey": "object:778",
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "3h",
+            "value": "3h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
             "selected": true,
-            "text": "BRL",
-            "value": "BRL"
+            "text": "24h",
+            "value": "24h"
           }
         ],
-        "query": "label_values(crypto_exchange_trade_count, quote_currency)",
-        "refresh": 0,
-        "regex": "",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "query": "1h,3h,6h,12h,24h",
+        "type": "custom"
       }
     ]
   },
@@ -703,5 +1265,5 @@
   },
   "timezone": "",
   "title": "Crypto Exporter",
-  "version": 47
+  "version": 36
 }
