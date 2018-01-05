@@ -3,6 +3,10 @@ global:
   scrape_interval:     5s
   evaluation_interval: 5s
 
+# Files for defining recording/alerting rules
+rule_files:
+  - /etc/prometheus/config/prometheus.rules.yml
+
 # Alertmanager configuration
 alerting:
   alertmanagers:

@@ -18,8 +18,9 @@ services:
   prometheus:
     image: prom/prometheus:v2.0.0
     restart: on-failure
+    command: --config.file=/etc/prometheus/config/prometheus.yml
     volumes:
-      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus/:/etc/prometheus/config/
     ports:
       - 9090:9090
     depends_on:

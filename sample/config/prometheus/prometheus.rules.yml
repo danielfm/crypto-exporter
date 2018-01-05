@@ -1,0 +1,9 @@
+# Example recording rules needed for some indicators, feel free to
+# customize the offsets for larger periods
+groups:
+  - name: rsi
+    rules:
+      - record: crypto_trade_price:rsi_upward_movement1h
+        expr: clamp_min(crypto_trade_price - crypto_trade_price offset 1h, 0)
+      - record: crypto_trade_price:rsi_downward_movement1h
+        expr: -clamp_max(crypto_trade_price - crypto_trade_price offset 1h, 0)
